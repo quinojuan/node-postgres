@@ -1,3 +1,4 @@
+const { query } = require("express");
 const { Pool } = require("pg");
 
 const config = {
@@ -20,8 +21,8 @@ const getBooks = async () => {
 
 const insertUser = async () => {
   await pool.query(`INSERT INTO users(username, password) VALUES ($1,$2)`, [
-    "polidoro",
-    "poli654",
+    "camila",
+    "camilawww",
   ]);
 
   const res = await pool.query("select * from users");
@@ -45,10 +46,21 @@ const getUsers = async () => {
   const text = "SELECT * FROM users";
   const res = await pool.query(text);
   console.log(res.rows);
-  pool.end();
+  // pool.end();
 };
+
+const updateUser = async () => {
+  const text = "UPDATE users set username = $1 where username = $2";
+  const values = ["juan", "camila"];
+
+  const res = await pool.query(text, values);
+  console.log(res);
+  // pool.end()
+};
+
 // getBooks();
 // insertUser();
 // deleteUser();
-deleteAllUsers();
+// deleteAllUsers();
 getUsers();
+// updateUser();
